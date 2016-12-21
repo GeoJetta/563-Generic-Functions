@@ -15,6 +15,7 @@ Here's what you need to change in your own code to use these libraries:
 - Using Functions
   - Check out a function in the file and check what it asks for
   - Then use it like this: `<function name>(<stuff it asks for>);`
+
 ###In the Files
 Here's what you need to change in the libraries before you use them:
 -`lcd.c`
