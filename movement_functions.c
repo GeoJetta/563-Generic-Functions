@@ -20,37 +20,65 @@
 /*
 /**********************************************************************/
  
-// Change these to motor names
-#define rightFrontMotor FR
-#define rightBackMotor  BR
-#define leftFrontMotor  FL
-#define leftBackMotor       BL
+//Number of motors on drive
+#define NUMBER_OF_DRIVE_MOTORS 4
+
+//WARNING: ONLY WORKS WITH EVEN NUMBERS OF MOTORS
+tMotor driveMotors[NUMBER_OF_DRIVE_MOTORS] =
+{
+	
+	/****************************************************************/
+	/*	INSERT MOTOR NAMES HERE  									*/
+	/*		Go in order from back to front, left to right			*/
+	/*	EXAMPLE:													*/
+	/*		leftBackMotor, leftMiddleMotor, leftFrontMotor			*/
+	/*		rightBackMotor, rightMiddleMotor, rightFrontMotor		*/
+	/*	USE THIS FORMATTING FOR ANY AND ALL DRIVE CONFIGURATIONS	*/
+	/****************************************************************/
+	
+}
  
 // Set constant values for motor and turn functions
-#define RIGHTSIDE   0
-#define LEFTSIDE    1
-#define ALL     2
+enum
+{
+	//each of these is the same as using #define, it just sets the first to 0, second to 1, etc.
+	RIGHTSIDE, 
+	LEFTSIDE,
+	ALL
+
+}
  
  
 //++++++++++++++++++++++| function: SET DRIVE MOTOR POWER |++++++++++++++++++++++++++++++++++++
 void setDriveMotorPower (int motorPower, int motors)
 {
+	
+	int motorIndex;
+	
     // Set power for RIGHTSIDE side drive motors
     if (motors == RIGHTSIDE) {
-        motor[rightFrontMotor] = motorPower;
-        motor[rightBackMotor] = motorPower;
+        //For the last half of the motors (right side), set them to motorPower
+		//Subtract one because arrays start at 0
+		for (motorIndex = NUMBER_OF_DRIVE_MOTORS; motorIndex > (NUMBER_OF_DRIVE_MOTORS/2)-1; motorIndex--)
+		{
+			motor[motorIndex] = motorPower;
+		}
  
     // Set power for LEFTSIDE side drive motors
     } else if (motors == LEFTSIDE) {
-        motor[leftFrontMotor] = motorPower;
-        motor[leftBackMotor] = motorPower;
+        //For the first half of the motors (left side), set them to motorPower
+		for (motorIndex = 0; motorIndex < (NUMBER_OF_DRIVE_MOTORS/2); motorIndex++)
+		{
+			motor[motorIndex] = motorPower;
+		}
  
     // Set power for ALL drive motors
     } else if (motors == ALL) {
-        motor[rightFrontMotor] = motorPower;
-        motor[rightBackMotor] = motorPower;
-        motor[leftFrontMotor] = motorPower;
-        motor[leftBackMotor] = motorPower;
+        //Go through all of the motors and set them to motorPower
+		for (motorIndex = 0; motorIndex < NUMBER_OF_DRIVE_MOTORS; motorIndex++)
+		{
+			motor[motorIndex] = motorPower;
+		}
     }
  
 }
