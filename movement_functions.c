@@ -6,7 +6,7 @@
 /* USAGE:
 /*  These functions are meant for use with any robot with the following:
 /*  - 4 motor drive  (2 left side, 2 right side, sides are from the perspective of the robot)
-/*  - Integrated Encoders must be installed on "leftBackMotor" and "rightBackMotor"
+/*  - Integrated Encoders must be installed on "leftDriveMotor" and "rightDriveMotor" (changed to correct name)
 /*
 /* FUNCTION DEFINITIONS:
 /*  void setDriveMotorPower (int motorPower, char rightOrLeft)
@@ -22,6 +22,9 @@
  
 //Number of motors on drive
 #define NUMBER_OF_DRIVE_MOTORS 4
+//Replace with names of motors that have encoders
+#define MOTOR_WITH_LEFT_ENC leftMotorName
+#define MOTOR_WITH_RIGHT_ENC rightMotorName
 
 //WARNING: ONLY WORKS WITH EVEN NUMBERS OF MOTORS
 tMotor driveMotors[NUMBER_OF_DRIVE_MOTORS] =
@@ -94,8 +97,8 @@ void driveStraight (int motorPower, int maxEncoderValue)
     int encoderValue = 0;
  
     // Reset the encoders
-    nMotorEncoder[leftBackMotor] = 0;
-    nMotorEncoder[rightBackMotor] = 0;
+    nMotorEncoder[MOTOR_WITH_LEFT_ENC] = 0;
+    nMotorEncoder[MOTOR_WITH_RIGHT_ENC] = 0;
  
     // Start the motors
     setDriveMotorPower(motorPower, RIGHTSIDE);
@@ -105,36 +108,36 @@ void driveStraight (int motorPower, int maxEncoderValue)
     while (encoderValue < absMaxEncoderValue) {
  
     // If leftEncoderValue == rightEncoderValue, set motors to same power
-        if (nMotorEncoder[leftBackMotor] == nMotorEncoder[rightBackMotor]) { //
+        if (nMotorEncoder[MOTOR_WITH_LEFT_ENC] == nMotorEncoder[MOTOR_WITH_RIGHT_ENC]) { //
                 setDriveMotorPower(motorPower, RIGHTSIDE);
                 setDriveMotorPower(motorPower, LEFTSIDE);
         }
         if (motorPower > 0) {  // Forward
             // If the left motor is moving faster, decrease power by 15%
-            if (nMotorEncoder[leftBackMotor] > nMotorEncoder[rightBackMotor]) {
+            if (nMotorEncoder[MOTOR_WITH_LEFT_ENC] > nMotorEncoder[MOTOR_WITH_RIGHT_ENC]) {
                 setDriveMotorPower(motorPower, RIGHTSIDE);
                 setDriveMotorPower(motorPower*.85, LEFTSIDE);
             }
             // If the right motor is moving faster, decrease power by 15%
-            if (nMotorEncoder[leftBackMotor] < nMotorEncoder[rightBackMotor]) {
+            if (nMotorEncoder[MOTOR_WITH_LEFT_ENC] < nMotorEncoder[MOTOR_WITH_RIGHT_ENC]) {
                 setDriveMotorPower(motorPower*.85, RIGHTSIDE);
                 setDriveMotorPower(motorPower, LEFTSIDE);
             }
         } else {  // Reverse
             // If the left motor is moving faster, decrease power by 15%
-            if (nMotorEncoder[leftBackMotor] < nMotorEncoder[rightBackMotor]) {
+            if (nMotorEncoder[MOTOR_WITH_LEFT_ENC] < nMotorEncoder[MOTOR_WITH_RIGHT_ENC]) {
                 setDriveMotorPower(motorPower, RIGHTSIDE);
                 setDriveMotorPower(motorPower*.85, LEFTSIDE);
             }
             // If the right motor is moving faster, decrease power by 15%
-            if (nMotorEncoder[leftBackMotor] > nMotorEncoder[rightBackMotor]) {
+            if (nMotorEncoder[MOTOR_WITH_LEFT_ENC] > nMotorEncoder[MOTOR_WITH_RIGHT_ENC]) {
                 setDriveMotorPower(motorPower*.85, RIGHTSIDE);
                 setDriveMotorPower(motorPower, LEFTSIDE);
             }
         }
  
         // Reset encoder value for loop test
-        encoderValue = abs(nMotorEncoder[leftBackMotor]);
+        encoderValue = abs(nMotorEncoder[MOTOR_WITH_LEFT_ENC]);
  
     } // End WHILE loop
  
@@ -158,7 +161,7 @@ void swingTurn (int motorPower, int maxEncoderValue, INT leftOrRight)
     if (leftOrRight == LEFTSIDE) {
  
         setDriveMotorPower(motorPower, RIGHTSIDE);
-        while (nMotorEncoder[rightBackMotor] < maxEncoderValue) {
+        while (nMotorEncoder[MOTOR_WITH_RIGHT_ENC] < maxEncoderValue) {
             // Keep turning while maxEncoderValue hasn't been reached
         }
         setDriveMotorPower(stopMotor, RIGHTSIDE);
@@ -167,7 +170,7 @@ void swingTurn (int motorPower, int maxEncoderValue, INT leftOrRight)
     } else if (leftOrRight == RIGHTSIDE) {
  
         setDriveMotorPower(motorPower, LEFTSIDE);
-        while (nMotorEncoder[leftBackMotor] < maxEncoderValue) {
+        while (nMotorEncoder[MOTOR_WITH_LEFT_ENC] < maxEncoderValue) {
             // Keep turning while maxEncoderValue hasn't been reached
         }
         setDriveMotorPower(stopMotor, LEFTSIDE);
@@ -190,7 +193,7 @@ void pointTurn (int motorPower, int maxEncoderValue, int leftOrRight)
  
         setDriveMotorPower(motorPower, RIGHTSIDE);
         setDriveMotorPower(reverse*motorPower, LEFTSIDE);
-        while (nMotorEncoder[rightBackMotor] < maxEncoderValue) {
+        while (nMotorEncoder[MOTOR_WITH_RIGHT_ENC] < maxEncoderValue) {
             // Keep turning while maxEncoderValue hasn't been reached
         }
  
@@ -199,7 +202,7 @@ void pointTurn (int motorPower, int maxEncoderValue, int leftOrRight)
  
         setDriveMotorPower(motorPower, LEFTSIDE);
         setDriveMotorPower(reverse*motorPower, RIGHTSIDE);
-        while (nMotorEncoder[leftBackMotor] < maxEncoderValue) {
+        while (nMotorEncoder[MOTOR_WITH_LEFT_ENC] < maxEncoderValue) {
             // Keep turning while maxEncoderValue hasn't been reached
         }
     }
