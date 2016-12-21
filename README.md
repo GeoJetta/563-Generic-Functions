@@ -18,11 +18,11 @@ Here's what you need to change in your own code to use these libraries:
 
 ###In the Files
 Here's what you need to change in the libraries before you use them:
--`lcd.c`
+- `lcd.c`
   - Make sure your LCD is plugged into UART 2.
   - On `line 46`, change `string_1`, `string_2`, etc. to the label you want to see on the LCD screen for each autonomous.
   - This isn't done yet!
--`movement_functions`
+- `movement_functions`
   - Change the number after `#define NUMBER_OF_DRIVE_MOTORS` to how many motors you have on your drive.
   - Change `leftMotorName` and `rightMotorName` after `#define MOTOR_WITH_LEFT_ENC` and `#define MOTOR_WITH_RIGHT_ENC` to the name of your motor the IME is on
   - Follow the instructions in this array:
