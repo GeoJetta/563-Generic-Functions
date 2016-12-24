@@ -5,7 +5,7 @@
 /*
 /* USAGE:
 /*  These functions are meant for use with any robot with the following:
-/*  - 4 motor drive  (2 left side, 2 right side, sides are from the perspective of the robot)
+/*  - Any number of motors on symmetrical drive
 /*  - Integrated Encoders must be installed on "leftDriveMotor" and "rightDriveMotor" (changed to correct name)
 /*
 /* FUNCTION DEFINITIONS:
@@ -17,6 +17,7 @@
 /* VERSION HISTORY:
 /*  11.22.2014 - Created (jrushing)
 /*  11.05.2015 - Revised to make motor name changes easier
+/*  12.24.2016 - Revised for use with any symmetrical drivetrain (gsmith)
 /*
 /**********************************************************************/
  
@@ -31,12 +32,12 @@ tMotor driveMotors[NUMBER_OF_DRIVE_MOTORS] =
 {
 	
 	/****************************************************************/
-	/*	INSERT MOTOR NAMES HERE  									*/
-	/*		Go in order from back to front, left to right			*/
-	/*	EXAMPLE:													*/
-	/*		leftBackMotor, leftMiddleMotor, leftFrontMotor			*/
-	/*		rightBackMotor, rightMiddleMotor, rightFrontMotor		*/
-	/*	USE THIS FORMATTING FOR ANY AND ALL DRIVE CONFIGURATIONS	*/
+	/*	INSERT MOTOR NAMES HERE 
+	/*		Go in order from back to front, left to right
+	/*	EXAMPLE:
+	/*		leftBackMotor, leftMiddleMotor, leftFrontMotor
+	/*		rightBackMotor, rightMiddleMotor, rightFrontMotor
+	/*	USE THIS FORMATTING FOR ANY AND ALL DRIVE CONFIGURATIONS
 	/****************************************************************/
 	
 }
