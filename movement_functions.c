@@ -64,7 +64,7 @@ void setDriveMotorPower (int motorPower, int motors)
 		//Subtract one because arrays start at 0
 		for (motorIndex = NUMBER_OF_DRIVE_MOTORS; motorIndex > (NUMBER_OF_DRIVE_MOTORS/2)-1; motorIndex--)
 		{
-			motor[motorIndex] = motorPower;
+			motor[driveMotors[motorIndex]] = motorPower;
 		}
  
     // Set power for LEFTSIDE side drive motors
@@ -72,7 +72,7 @@ void setDriveMotorPower (int motorPower, int motors)
         //For the first half of the motors (left side), set them to motorPower
 		for (motorIndex = 0; motorIndex < (NUMBER_OF_DRIVE_MOTORS/2); motorIndex++)
 		{
-			motor[motorIndex] = motorPower;
+			motor[driveMotors[motorIndex]] = motorPower;
 		}
  
     // Set power for ALL drive motors
@@ -80,7 +80,7 @@ void setDriveMotorPower (int motorPower, int motors)
         //Go through all of the motors and set them to motorPower
 		for (motorIndex = 0; motorIndex < NUMBER_OF_DRIVE_MOTORS; motorIndex++)
 		{
-			motor[motorIndex] = motorPower;
+			motor[driveMotors[motorIndex]] = motorPower;
 		}
     }
  
